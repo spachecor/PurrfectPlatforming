@@ -23,6 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Menú activity -->
+        <activity android:name=".MenuActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
+        <!-- Mapa activity -->
     </application>
 
 </manifest>
