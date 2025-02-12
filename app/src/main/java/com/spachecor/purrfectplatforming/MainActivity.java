@@ -21,24 +21,22 @@ public class MainActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
 
-        // Actualiza la barra de progreso cada 50ms hasta que llegue al 100%
+        //actualiza la barra de progreso cada 50ms hasta que llegue al 100% (5 seg)
         new Thread(() -> {
             while (progressStatus < 100) {
-                progressStatus += 1; // Incrementa en 1% cada iteración
+                progressStatus += 1; //incrementa en 1% cada iteración
                 handler.post(() -> progressBar.setProgress(progressStatus));
                 try {
-                    Thread.sleep(50); // Espera 50ms antes de la siguiente actualización
+                    Thread.sleep(50); //espera 50ms antes de la siguiente actualización
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-
-            // Cuando termine la barra, inicia la siguiente actividad
+            //cuando termine la barra, inicia la siguiente actividad
             handler.post(() -> {
                 startActivity(new Intent(MainActivity.this, MenuActivity.class));
                 finish();
             });
-
         }).start();
     }
 }
