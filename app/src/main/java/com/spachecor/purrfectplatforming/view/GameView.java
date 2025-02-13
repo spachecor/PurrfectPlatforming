@@ -8,11 +8,15 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
+import com.spachecor.purrfectplatforming.R;
+import com.spachecor.purrfectplatforming.gameobject.personaje.Jugador;
+import com.spachecor.purrfectplatforming.service.SpriteManager;
 import com.spachecor.purrfectplatforming.thread.GameThread;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
+    private Jugador ejemplo;
 
     public GameView(Context context) {
         super(context);
@@ -26,12 +30,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update(){
         //todo comportamiento de actualizacion del bucle principal
+        SpriteManager.controlSpriteMovement(this.ejemplo);
     }
 
     @Override
     public void draw(Canvas canvas) {
-        super.draw(canvas);
         //todo comportamiento de dibujo
+        if (canvas != null) {
+            super.draw(canvas);
+            canvas.drawColor(0xFFFFFFFF); //pintamos de blanco pa ver el personaje
+            this.ejemplo.draw(canvas);
+        }
     }
 
     @Override
@@ -43,6 +52,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
         //todo el comportamiento al crear la pantalla superficie
+        this.ejemplo = new Jugador(this.getContext(), 200, 500, 100, 100, new int[]{R.drawable.gordisentada1, R.drawable.gordisentada1, R.drawable.gordisentada1, R.drawable.gordisentada2, R.drawable.gordisentada2, R.drawable.gordisentada2});
+        this.gameThread.setRunning(true);
+        this.gameThread.start();
     }
 
     @Override
@@ -53,6 +65,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
         //todo el comportamiento al eliminar/destruir la pantalla superficie
+        boolean retry = true;
+        this.gameThread.setRunning(false);
+        while (retry) {
+            try {
+                this.gameThread.join();
+                retry = false;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

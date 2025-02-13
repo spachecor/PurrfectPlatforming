@@ -28,6 +28,10 @@
             android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
         <!-- Mapa activity -->
+        <!-- Game activity -->
+        <activity android:name=".GameActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
     </application>
 
 </manifest>
