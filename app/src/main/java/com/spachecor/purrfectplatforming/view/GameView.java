@@ -8,17 +8,18 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.spachecor.purrfectplatforming.R;
-import com.spachecor.purrfectplatforming.gameobject.personaje.Jugador;
+import com.spachecor.purrfectplatforming.gameobject.personaje.Gamer;
 import com.spachecor.purrfectplatforming.service.SpriteManager;
 import com.spachecor.purrfectplatforming.thread.GameThread;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
-    private Jugador ejemplo;
+    private Gamer gamer;
+    Boolean isHolding;//variable bandera que indica si el usuario realiza un toque mantenido o un toque simple
+    Float touchX;//posicion en el eje X del toque detectado
 
-    public GameView(Context context) {
+    public GameView(Context context, Gamer gamer) {
         super(context);
         //agregamos el callback para gestionar los cambios en el SurfaceHolder(creacion, cambios y destruccion de la superficie)
         this.getHolder().addCallback(this);
@@ -26,11 +27,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.gameThread = new GameThread(this.getHolder(), this);
         //activamos que esta vista pueda recibir eventos de toque para controlar el juego
         this.setFocusable(true);
+        //creamos el personaje
+        this.gamer = gamer;
     }
 
     public void update(){
         //todo comportamiento de actualizacion del bucle principal
-        SpriteManager.controlSpriteMovement(this.ejemplo);
+        SpriteManager.controlSpriteMovement(this.gamer);
     }
 
     @Override
@@ -39,20 +42,28 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if (canvas != null) {
             super.draw(canvas);
             canvas.drawColor(0xFFFFFFFF); //pintamos de blanco pa ver el personaje
-            this.ejemplo.draw(canvas);
+            this.gamer.draw(canvas);
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //todo el comportamiento al tocar en la pantalla
+        //obtenemos la acción de evento de toque
+        int action = event.getActionMasked();
+        switch (action){
+            //usuario inicia un toque
+            case MotionEvent.ACTION_DOWN:
+                //declaramos que el usuario ha dado un toque simple y recogemos su valor en el eje X
+                this.isHolding = false;
+                this.touchX = event.getX();
+        }
         return false;
     }
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
         //todo el comportamiento al crear la pantalla superficie
-        this.ejemplo = new Jugador(this.getContext(), 200, 500, 100, 100, new int[]{R.drawable.gordisentada1, R.drawable.gordisentada1, R.drawable.gordisentada1, R.drawable.gordisentada2, R.drawable.gordisentada2, R.drawable.gordisentada2});
         this.gameThread.setRunning(true);
         this.gameThread.start();
     }

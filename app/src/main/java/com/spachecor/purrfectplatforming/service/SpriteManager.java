@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.spachecor.purrfectplatforming.gameobject.GameObject;
-import com.spachecor.purrfectplatforming.gameobject.personaje.Personaje;
 
 /**
  * Clase SpriteManager que se encarga de gestionar los sprites en el juego
