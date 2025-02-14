@@ -4,8 +4,7 @@ import android.content.Context;
 
 public class Gamer extends Character {
 
-    private Integer velocityY;
-    private Integer jumpForce;
+    private final Integer JUMP_FORCE;
     private Integer walkingVelocity;
 
     /**
@@ -19,8 +18,34 @@ public class Gamer extends Character {
      */
     public Gamer(Context context, Integer posicionX, Integer posicionY, Integer width, Integer height, int[] spriteResources, Integer jumpForce, Integer walkingVelocity) {
         super(context, posicionX, posicionY, width, height, spriteResources);
-        this.velocityY = 0;
-        this.jumpForce = jumpForce;
+        this.setVelocityY(0);
+        this.JUMP_FORCE = jumpForce;
         this.walkingVelocity = walkingVelocity;
+        this.setJumping(false);
     }
+
+    /**
+     * Inicia el salto del personaje.
+     * Si el personaje no está saltando, se aplica la fuerza de salto
+     * y se marca como en estado de salto.
+     */
+    public void jump() {
+        if (!this.getJumping()) {
+            this.setVelocityY(this.JUMP_FORCE);
+            this.setJumping(true);
+        }
+    }
+    /**
+     * Funcion que determina que el personaje se mueva hacia la izquierda
+     */
+    public void leftMove(){
+        this.setPosicionX(this.getPosicionX()-this.walkingVelocity);
+    }
+    /**
+     * Funcion que determina que el personaje se mueva hacia la derecha
+     */
+    public void rightMove(){
+        this.setPosicionX(this.getPosicionX()+this.walkingVelocity);
+    }
+
 }

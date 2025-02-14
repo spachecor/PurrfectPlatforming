@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.spachecor.purrfectplatforming.gameobject.personaje.Gamer;
+import com.spachecor.purrfectplatforming.service.SpriteManager;
 import com.spachecor.purrfectplatforming.view.GameView;
 
 public class GameActivity extends AppCompatActivity {
@@ -21,17 +22,11 @@ public class GameActivity extends AppCompatActivity {
                                 500,
                                 100,
                                 100,
-                                new int[]{
-                                        R.drawable.gordisentada1,
-                                        R.drawable.gordisentada1,
-                                        R.drawable.gordisentada1,
-                                        R.drawable.gordisentada2,
-                                        R.drawable.gordisentada2,
-                                        R.drawable.gordisentada2
-                                },
+                                SpriteManager.Sprite.GORDI_SENTADA.getVALORES(),
                                 -30,
-                                10
-                        )
+                                20
+                        ),
+                        2
                 )
         );
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.spachecor.purrfectplatforming.R;
 import com.spachecor.purrfectplatforming.gameobject.GameObject;
 
 /**
@@ -13,6 +14,48 @@ import com.spachecor.purrfectplatforming.gameobject.GameObject;
  */
 public class SpriteManager {
     private static final Integer FRAME_LENGTH_IN_MILLISECONDS = 100;
+
+    public enum Sprite{
+        GORDI_SENTADA(
+                new int[]{
+                        R.drawable.gordisentada1,
+                        R.drawable.gordisentada1,
+                        R.drawable.gordisentada1,
+                        R.drawable.gordisentada2,
+                        R.drawable.gordisentada2,
+                        R.drawable.gordisentada2
+                }
+        ),
+        GORDI_CAMINANDO_IZQ(
+                new int[]{
+                        R.drawable.gordicaminandoizq1,
+                        R.drawable.gordicaminandoizq1,
+                        R.drawable.gordicaminandoizq2,
+                        R.drawable.gordicaminandoizq2,
+                        R.drawable.gordicaminandoizq3,
+                        R.drawable.gordicaminandoizq3
+                }
+        ),
+        GORDI_CAMINANDO_DCHA(
+                new int[]{
+                        R.drawable.gordicaminandodcha1,
+                        R.drawable.gordicaminandodcha1,
+                        R.drawable.gordicaminandodcha2,
+                        R.drawable.gordicaminandodcha2,
+                        R.drawable.gordicaminandodcha3,
+                        R.drawable.gordicaminandodcha3
+                }
+        );
+        private final int[] VALORES;
+        Sprite(int[] valores){
+            this.VALORES = valores;
+        }
+
+        public int[] getVALORES() {
+            return VALORES;
+        }
+    }
+
     /**
      * Funcion que se encarga de crear un array de bitmaps para generar el sprite del objeto.
      * @param context El contexto de la aplicación
@@ -39,17 +82,22 @@ public class SpriteManager {
         gameObject.setSpriteFrames(newFrames);
     }
 
+    /**
+     * Funcion que se encarga de actualizar la animacion del personaje segun sus fotogramas
+     * @param gameObject El personaje a actualizar la animacion
+     */
     public static synchronized void controlSpriteMovement(GameObject gameObject){
         long currentTime = System.currentTimeMillis();
+        //si ha pasado el tiempo requerido entre fotogramas, cambia de fotograma
         if(currentTime > gameObject.getLastFrameChangeTime() + SpriteManager.FRAME_LENGTH_IN_MILLISECONDS &&
                 gameObject.getSpriteFrames() != null &&
                 gameObject.getSpriteFrames().length > 0){
 
-            // Actualiza el frame actual
+            //actualiza el frame actual
             int nextFrame = (gameObject.getCurrentFrame() + 1) % gameObject.getSpriteFrames().length;
             gameObject.setCurrentFrame(nextFrame);
 
-            // Actualiza el tiempo de cambio de frame
+            //actualiza el tiempo de cambio de frame
             gameObject.setLastFrameChangeTime(currentTime);
         }
     }
