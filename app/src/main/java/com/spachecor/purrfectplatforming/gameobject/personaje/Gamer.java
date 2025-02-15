@@ -1,11 +1,19 @@
 package com.spachecor.purrfectplatforming.gameobject.personaje;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+
+import com.spachecor.purrfectplatforming.service.SpriteManager;
 
 public class Gamer extends Character {
 
     private final Integer JUMP_FORCE;
     private Integer walkingVelocity;
+
+    //sprites precargados
+    private final Bitmap[] GORDI_SENTADA;
+    private final Bitmap[] GORDI_CAMINANDO_IZQ;
+    private final Bitmap[] GORDI_CAMINANDO_DCHA;
 
     /**
      * Constructor del objeto Personaje
@@ -22,6 +30,24 @@ public class Gamer extends Character {
         this.JUMP_FORCE = jumpForce;
         this.walkingVelocity = walkingVelocity;
         this.setJumping(false);
+        this.GORDI_SENTADA = SpriteManager.bitmapCreator(
+                context,
+                width,
+                height,
+                SpriteManager.Sprite.GORDI_SENTADA.getVALORES()
+        );
+        this.GORDI_CAMINANDO_IZQ = SpriteManager.bitmapCreator(
+                context,
+                150,
+                height,
+                SpriteManager.Sprite.GORDI_CAMINANDO_IZQ.getVALORES()
+        );
+        this.GORDI_CAMINANDO_DCHA = SpriteManager.bitmapCreator(
+                context,
+                150,
+                height,
+                SpriteManager.Sprite.GORDI_CAMINANDO_DCHA.getVALORES()
+        );
     }
 
     /**
@@ -48,4 +74,15 @@ public class Gamer extends Character {
         this.setPosicionX(this.getPosicionX()+this.walkingVelocity);
     }
 
+    public Bitmap[] getGORDI_SENTADA() {
+        return GORDI_SENTADA;
+    }
+
+    public Bitmap[] getGORDI_CAMINANDO_IZQ() {
+        return GORDI_CAMINANDO_IZQ;
+    }
+
+    public Bitmap[] getGORDI_CAMINANDO_DCHA() {
+        return GORDI_CAMINANDO_DCHA;
+    }
 }

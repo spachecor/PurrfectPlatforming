@@ -78,14 +78,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 this.moveRunnable = () ->{
                     this.isHolding = true;//declaramos toque prolongado
                     if(this.touchX<(float)this.getWidth()/2){//movimiento izquierda
-                        this.gamer.setSpriteFrames(SpriteManager.bitmapCreator(this.getContext(), 150, this.gamer.getHeight(), SpriteManager.Sprite.GORDI_CAMINANDO_IZQ.getVALORES()));
+                        SpriteManager.setCurrentAnimation(this.gamer, this.gamer.getGORDI_CAMINANDO_IZQ());
                         this.gamer.leftMove();
                     }else{//movimiento derecha
-                        this.gamer.setSpriteFrames(SpriteManager.bitmapCreator(this.getContext(), 150, this.gamer.getHeight(), SpriteManager.Sprite.GORDI_CAMINANDO_DCHA.getVALORES()));
+                        SpriteManager.setCurrentAnimation(this.gamer, this.gamer.getGORDI_CAMINANDO_DCHA());
                         this.gamer.rightMove();
                     }
                     //programamos la ejecucion del runnable cada 10ms para continuar movimiento
-                    this.handler.postDelayed(this.moveRunnable, 10);
+                    this.handler.postDelayed(this.moveRunnable, 50);
                 };
                 //ahora programamos el moverunnable para que se ejecute cuando se cumpla el tiempo de movimiento prolongado.
                 this.handler.postDelayed(this.moveRunnable, this.THRESHOLD);
@@ -93,12 +93,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             //usuario deja de tocar
             case MotionEvent.ACTION_UP:
                 //restauramos el sprite de sentado
-                this.gamer.setSpriteFrames(SpriteManager.bitmapCreator(
-                        this.getContext(),
-                        this.gamer.getWidth(),
-                        this.gamer.getHeight(),
-                        SpriteManager.Sprite.GORDI_SENTADA.getVALORES()
-                ));
+                SpriteManager.setCurrentAnimation(this.gamer, this.gamer.getGORDI_SENTADA());
                 //cancelamos el runnable de movimiento
                 this.handler.removeCallbacks(this.moveRunnable);
                 //si NO fue un toque prolongado, ejecutamos el salto
