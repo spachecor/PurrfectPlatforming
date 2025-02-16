@@ -1,4 +1,4 @@
-package com.spachecor.purrfectplatforming.gameobject.personaje;
+package com.spachecor.purrfectplatforming.gameobject.character;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -50,6 +50,18 @@ public class Gamer extends Character {
         );
     }
 
+    public Bitmap[] getGORDI_SENTADA() {
+        return GORDI_SENTADA;
+    }
+
+    public Bitmap[] getGORDI_CAMINANDO_IZQ() {
+        return GORDI_CAMINANDO_IZQ;
+    }
+
+    public Bitmap[] getGORDI_CAMINANDO_DCHA() {
+        return GORDI_CAMINANDO_DCHA;
+    }
+
     /**
      * Inicia el salto del personaje.
      * Si el personaje no está saltando, se aplica la fuerza de salto
@@ -72,17 +84,5 @@ public class Gamer extends Character {
      */
     public void rightMove(){
         this.setPosicionX(this.getPosicionX()+this.walkingVelocity);
-    }
-
-    public Bitmap[] getGORDI_SENTADA() {
-        return GORDI_SENTADA;
-    }
-
-    public Bitmap[] getGORDI_CAMINANDO_IZQ() {
-        return GORDI_CAMINANDO_IZQ;
-    }
-
-    public Bitmap[] getGORDI_CAMINANDO_DCHA() {
-        return GORDI_CAMINANDO_DCHA;
     }
 }

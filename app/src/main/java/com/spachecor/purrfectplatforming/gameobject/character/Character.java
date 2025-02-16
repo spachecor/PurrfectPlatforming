@@ -1,4 +1,4 @@
-package com.spachecor.purrfectplatforming.gameobject.personaje;
+package com.spachecor.purrfectplatforming.gameobject.character;
 
 import android.content.Context;
 

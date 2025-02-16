@@ -13,9 +13,10 @@ import com.spachecor.purrfectplatforming.gameobject.GameObject;
  * @version 1.0
  */
 public class SpriteManager {
-    private static final Integer FRAME_LENGTH_IN_MILLISECONDS = 100;
 
     public enum Sprite{
+        //CHARACTERS
+        //GORDI
         GORDI_SENTADA(
                 new int[]{
                         R.drawable.gordisentada1,
@@ -45,6 +46,17 @@ public class SpriteManager {
                         R.drawable.gordicaminandodcha3,
                         R.drawable.gordicaminandodcha3
                 }
+        ),
+        //PLATFORMS
+        SOLID_PLATFORM(
+                new int[]{
+                        R.drawable.solidplatformcocina
+                }
+        ),
+        SEMISOLID_PLATFORM(
+                new int[]{
+                        R.drawable.semisolidplatformcocina
+                }
         );
         private final int[] VALORES;
         Sprite(int[] valores){
@@ -55,6 +67,8 @@ public class SpriteManager {
             return VALORES;
         }
     }
+
+    private static final Integer FRAME_LENGTH_IN_MILLISECONDS = 100;
 
     /**
      * Funcion que se encarga de crear un array de bitmaps para generar el sprite del objeto.

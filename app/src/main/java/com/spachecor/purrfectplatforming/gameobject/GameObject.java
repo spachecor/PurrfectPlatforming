@@ -38,10 +38,6 @@ public abstract class GameObject {
         this.lastFrameChangeTime = 0L;
     }
 
-    public synchronized void draw(Canvas canvas){
-        canvas.drawBitmap(this.spriteFrames[this.currentFrame], this.posicionX, this.posicionY, null);
-    }
-
     public Integer getPosicionX() {
         return posicionX;
     }
@@ -96,5 +92,9 @@ public abstract class GameObject {
 
     public void setLastFrameChangeTime(long lastFrameChangeTime) {
         this.lastFrameChangeTime = lastFrameChangeTime;
+    }
+
+    public synchronized void draw(Canvas canvas){
+        canvas.drawBitmap(this.spriteFrames[this.currentFrame], this.posicionX, this.posicionY, null);
     }
 }

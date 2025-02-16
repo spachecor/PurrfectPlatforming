@@ -15,6 +15,10 @@ public class GameThread extends Thread{
         this.gameView = gameView;
     }
 
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
     @Override
     public void run() {
         while(this.running){
@@ -37,9 +41,5 @@ public class GameThread extends Thread{
                 if(canvas!=null)this.SURFACE_HOLDER.unlockCanvasAndPost(canvas);
             }
         }
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
     }
 }

@@ -9,7 +9,9 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
-import com.spachecor.purrfectplatforming.gameobject.personaje.Gamer;
+import com.spachecor.purrfectplatforming.gameobject.character.Gamer;
+import com.spachecor.purrfectplatforming.gameobject.platform.Platform;
+import com.spachecor.purrfectplatforming.levelgenerator.Level;
 import com.spachecor.purrfectplatforming.service.CollisionManager;
 import com.spachecor.purrfectplatforming.service.SpriteManager;
 import com.spachecor.purrfectplatforming.thread.GameThread;
@@ -17,16 +19,17 @@ import com.spachecor.purrfectplatforming.thread.GameThread;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
+    private Level level;
     private Gamer gamer;
     //Control del movimiento
     Boolean isHolding;//variable bandera que indica si el usuario realiza un toque mantenido o un toque simple
     Float touchX;//posicion en el eje X del toque detectado
     private Runnable moveRunnable;//objeto Runnable que se ejecuta periodicamente para mover al personaje
     private Handler handler;//manejador para programar tareas con un retardo(como el toque prolongado para movimiento)
-    private final int THRESHOLD;//tiempo en ms para considerar un toque prolongado
-    private final int GRAVITY;
+    private int threshold;//tiempo en ms para considerar un toque prolongado
+    private int gravity;
 
-    public GameView(Context context, Gamer gamer, int gravity) {
+    public GameView(Context context, Level level) {
         super(context);
         //agregamos el callback para gestionar los cambios en el SurfaceHolder(creacion, cambios y destruccion de la superficie)
         this.getHolder().addCallback(this);
@@ -34,19 +37,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.gameThread = new GameThread(this.getHolder(), this);
         //activamos que esta vista pueda recibir eventos de toque para controlar el juego
         this.setFocusable(true);
-        //creamos el personaje
-        this.gamer = gamer;
+        //tomamos el level
+        this.level = level;
+        //tomamos el personaje
+        this.gamer = level.getGamer();
         this.handler = new Handler();
-        this.THRESHOLD = 200;
-        this.GRAVITY = gravity;
+        this.threshold = 200;
+        this.gravity = level.getScenery().getGravity();
     }
 
     public void update(){
         //todo comportamiento de actualizacion del bucle principal
-        this.gamer.applyGravity(this.GRAVITY);
-        //actualizamos la posicion del personaje
+        this.gamer.applyGravity(this.gravity);
         //todo revisar para eliminar linea de setnewposition
-        this.gamer.setNewPosition(this.gamer.getPosicionX(), this.gamer.getPosicionY());
+        //actualizamos la posicion del personaje
+        //this.gamer.setNewPosition(this.gamer.getPosicionX(), this.gamer.getPosicionY());
         //activamos la secuenciacion de fotogramas del personaje para imitar movimiento
         SpriteManager.controlSpriteMovement(this.gamer);
         //controlar que el personaje no se salga por el suelo
@@ -58,7 +63,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         //todo comportamiento de dibujo
         if (canvas != null) {
             super.draw(canvas);
-            canvas.drawColor(0xFFFFFFFF); //pintamos de blanco pa ver el personaje
+            this.level.getScenery().drawBackground(canvas);
+            for(Platform platform: this.level.getPlatforms()){
+                platform.draw(canvas);
+            }
             this.gamer.draw(canvas);
         }
     }
@@ -88,7 +96,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     this.handler.postDelayed(this.moveRunnable, 50);
                 };
                 //ahora programamos el moverunnable para que se ejecute cuando se cumpla el tiempo de movimiento prolongado.
-                this.handler.postDelayed(this.moveRunnable, this.THRESHOLD);
+                this.handler.postDelayed(this.moveRunnable, this.threshold);
                 break;
             //usuario deja de tocar
             case MotionEvent.ACTION_UP:
@@ -118,6 +126,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
         //todo el comportamiento al crear la pantalla superficie
+        //construimos el fondo
+        this.level.getScenery().setBackground(this, this.getWidth(), this.getHeight());
         this.gameThread.setRunning(true);
         this.gameThread.start();
     }

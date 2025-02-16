@@ -1,6 +1,6 @@
 package com.spachecor.purrfectplatforming.service;
 
-import com.spachecor.purrfectplatforming.gameobject.personaje.Character;
+import com.spachecor.purrfectplatforming.gameobject.character.Character;
 
 public class CollisionManager {
     public static void lowerCollision(int lowerLimit, Character character){
@@ -9,7 +9,7 @@ public class CollisionManager {
             character.setVelocityY(0);
             character.setJumping(false);
             //todo revisar si eliminar siguiente linea
-            character.setNewPosition(character.getPosicionX(), character.getPosicionY());
+            //character.setNewPosition(character.getPosicionX(), character.getPosicionY());
         }
     }
 }
