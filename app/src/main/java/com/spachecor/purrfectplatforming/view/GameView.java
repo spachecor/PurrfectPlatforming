@@ -49,13 +49,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void update(){
         //todo comportamiento de actualizacion del bucle principal
         this.gamer.applyGravity(this.gravity);
-        //todo revisar para eliminar linea de setnewposition
-        //actualizamos la posicion del personaje
-        //this.gamer.setNewPosition(this.gamer.getPosicionX(), this.gamer.getPosicionY());
         //activamos la secuenciacion de fotogramas del personaje para imitar movimiento
         SpriteManager.controlSpriteMovement(this.gamer);
+        //reajustamos la posición del rectangulo del personaje según su movimiento
+        this.gamer.getRectContainer().set(this.gamer.getPosicionX(), this.gamer.getPosicionY(), this.gamer.getPosicionX()+this.gamer.getWidth(), this.gamer.getPosicionY()+this.gamer.getHeight());
         //controlar que el personaje no se salga por el suelo
         CollisionManager.lowerCollision(this.getHeight(), this.gamer);
+        //comprobamos colisionamiento entre personajes y plataformas
+        CollisionManager.managingCollisionsPlatformsCharacters(this.level.getPlatforms(), this.gamer);
     }
 
     @Override

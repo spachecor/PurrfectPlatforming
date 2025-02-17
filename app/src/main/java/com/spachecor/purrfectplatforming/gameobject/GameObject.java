@@ -3,6 +3,7 @@ package com.spachecor.purrfectplatforming.gameobject;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 
 import com.spachecor.purrfectplatforming.service.SpriteManager;
 
@@ -19,6 +20,7 @@ public abstract class GameObject {
     private Bitmap[] spriteFrames;
     private int currentFrame;
     private long lastFrameChangeTime;
+    private Rect rectContainer;
     /**
      * Constructor del objeto GameObject
      * @param context El contexto de la aplicación
@@ -36,6 +38,7 @@ public abstract class GameObject {
         this.spriteFrames = SpriteManager.bitmapCreator(context, width, height, spriteResources);
         this.currentFrame = 0;
         this.lastFrameChangeTime = 0L;
+        this.rectContainer = new Rect(posicionX, posicionY, posicionX+width, posicionY+height);
     }
 
     public Integer getPosicionX() {
@@ -92,6 +95,14 @@ public abstract class GameObject {
 
     public void setLastFrameChangeTime(long lastFrameChangeTime) {
         this.lastFrameChangeTime = lastFrameChangeTime;
+    }
+
+    public Rect getRectContainer() {
+        return rectContainer;
+    }
+
+    public void setRectContainer(Rect rectContainer) {
+        this.rectContainer = rectContainer;
     }
 
     public synchronized void draw(Canvas canvas){
