@@ -16,6 +16,24 @@ public class CollisionManager {
             character.setJumping(false);
         }
     }
+    public static void horizontalCollision(int screenWidth, Character character) {
+        //verificamos la colisión con el lado izquierdo
+        if (character.getPosicionX() < 0) {
+            character.setPosicionX(0);
+        }
+        //verificamos la colisión con el lado derecho
+        else if (character.getPosicionX() + character.getWidth() > screenWidth) {
+            character.setPosicionX(screenWidth - character.getWidth());
+        }
+        //actualizamos el rectángulo de colisión del personaje
+        character.getRectContainer().set(
+                character.getPosicionX(),
+                character.getPosicionY(),
+                character.getPosicionX() + character.getWidth(),
+                character.getPosicionY() + character.getHeight()
+        );
+    }
+
     public static void managingCollisionsPlatformsCharacters(List<Platform> platforms, Character character){
         //recorremos las plataformas para detectar colision
         for (Platform platform:platforms){

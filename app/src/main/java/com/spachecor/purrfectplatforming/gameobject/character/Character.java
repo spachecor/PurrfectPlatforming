@@ -22,16 +22,6 @@ public abstract class Character extends GameObject{
     }
 
     /**
-     * Funcion que aplica la nueva posicion al personaje
-     * @param x posicion en x
-     * @param y posicion en y
-     */
-    public void setNewPosition(int x, int y){
-        super.setPosicionX(x);
-        super.setPosicionY(y);
-    }
-
-    /**
      * Funcion que aplica la gravedad al eje x del personaje
      * @param gravity La gravedad
      */
