@@ -25,7 +25,7 @@ public class GameActivity extends AppCompatActivity {
         platforms.add(new Platform(this, 500, 500, 100, 15, SpriteManager.Sprite.SOLID_PLATFORM.getVALORES(), Platform.PlatformType.SOLID));
         platforms.add(new Platform(this, 750, 500, 100, 10, SpriteManager.Sprite.SEMISOLID_PLATFORM.getVALORES(), Platform.PlatformType.SEMISOLID));
         List<Enemy> enemies = new ArrayList<>();
-        enemies.add(new Enemy(this, 500, 500, 100, 100, SpriteManager.Sprite.TOILET_PAPER.getVALORES(), 15));
+        enemies.add(new Enemy(this, 500, 500, 100, 100, SpriteManager.Sprite.TOILET_PAPER.getVALORES(), 3, true, 500, 700));
         Level level = new Level(
                 new Scenery(
                         2,

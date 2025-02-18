@@ -5,10 +5,10 @@ import com.spachecor.purrfectplatforming.gameobject.character.Enemy;
 import com.spachecor.purrfectplatforming.gameobject.character.Gamer;
 
 public class CharacterCollisionManager extends CollisionManager{
-    public static int managingCollisionGamerTrophy(Gamer gamer, Trophy trophy){
-        return (CollisionManager.isThereACollision(gamer, trophy))?1:0;
+    public static boolean managingCollisionGamerTrophy(Gamer gamer, Trophy trophy){
+        return CollisionManager.isThereACollision(gamer, trophy);
     }
-    public static int managingCollisionGamerEnemy(Gamer gamer, Enemy enemy){
-        return (CollisionManager.isThereACollision(gamer, enemy))?-1:0;
+    public static boolean managingCollisionGamerEnemy(Gamer gamer, Enemy enemy){
+        return CollisionManager.isThereACollision(gamer, enemy);
     }
 }
