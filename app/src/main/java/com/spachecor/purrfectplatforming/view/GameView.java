@@ -9,11 +9,14 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
+import com.spachecor.purrfectplatforming.gameobject.character.Enemy;
 import com.spachecor.purrfectplatforming.gameobject.character.Gamer;
 import com.spachecor.purrfectplatforming.gameobject.platform.Platform;
 import com.spachecor.purrfectplatforming.levelgenerator.Level;
-import com.spachecor.purrfectplatforming.service.CollisionManager;
+import com.spachecor.purrfectplatforming.service.collision.CharacterCollisionManager;
+import com.spachecor.purrfectplatforming.service.collision.CollisionManager;
 import com.spachecor.purrfectplatforming.service.SpriteManager;
+import com.spachecor.purrfectplatforming.service.collision.PlatformCollisionManager;
 import com.spachecor.purrfectplatforming.thread.GameThread;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -28,6 +31,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Handler handler;//manejador para programar tareas con un retardo(como el toque prolongado para movimiento)
     private int threshold;//tiempo en ms para considerar un toque prolongado
     private int gravity;
+    //Control de victoria o derrota
+    private int result;//0=jugando, 1=victoria, -1=derrota
 
     public GameView(Context context, Level level) {
         super(context);
@@ -44,6 +49,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.handler = new Handler();
         this.threshold = 200;
         this.gravity = level.getScenery().getGravity();
+        this.result = 0;
     }
 
     public void update(){
@@ -53,11 +59,32 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         SpriteManager.controlSpriteMovement(this.gamer);
         //reajustamos la posición del rectangulo del personaje según su movimiento
         this.gamer.getRectContainer().set(this.gamer.getPosicionX(), this.gamer.getPosicionY(), this.gamer.getPosicionX()+this.gamer.getWidth(), this.gamer.getPosicionY()+this.gamer.getHeight());
+        for(Enemy enemy:this.level.getEnemies()){//reajustamos gravedad y rectangulo del enemigo
+            enemy.applyGravity(this.gravity);
+            enemy.getRectContainer().set(enemy.getPosicionX(), enemy.getPosicionY(), enemy.getPosicionX()+enemy.getWidth(), enemy.getPosicionY()+enemy.getHeight());
+        }
+        //reajustamos la posición del rectangulo del trofeo
+        this.level.getTrophy().getRectContainer().set(this.level.getTrophy().getPosicionX(), this.level.getTrophy().getPosicionY(), this.level.getTrophy().getPosicionX()+this.level.getTrophy().getWidth(), this.level.getTrophy().getPosicionY()+this.level.getTrophy().getHeight());
         //controlar que el personaje no se salga por el suelo ni por los bordes
         CollisionManager.lowerCollision(this.getHeight(), this.gamer);
+        for(Enemy enemy:this.level.getEnemies()){
+            CollisionManager.lowerCollision(this.getHeight(), enemy);
+        }
         CollisionManager.horizontalCollision(this.getWidth(), this.gamer);
-        //comprobamos colisionamiento entre personajes y plataformas
-        CollisionManager.managingCollisionsPlatformsCharacters(this.level.getPlatforms(), this.gamer);
+        for(Enemy enemy:this.level.getEnemies()){
+            CollisionManager.horizontalCollision(this.getHeight(), enemy);
+        }
+        //comprobamos colisionamiento entre personajes y plataformas y entre jugadores y enemigos
+        PlatformCollisionManager.managingCollisionsPlatformsCharacters(this.level.getPlatforms(), this.gamer);
+        for(Enemy enemy:this.level.getEnemies()){
+            PlatformCollisionManager.managingCollisionsPlatformsCharacters(this.level.getPlatforms(), enemy);
+            this.result = CharacterCollisionManager.managingCollisionGamerEnemy(this.gamer, enemy);
+        }
+        //comprobamos colision entre jugador y trofeo
+        this.result = CharacterCollisionManager.managingCollisionGamerTrophy(this.gamer, this.level.getTrophy());
+        if(this.result==1) System.out.println("VICTORY");
+        else if(this.result==-1) System.out.println("GAME OVER");
+        else System.out.println("NOTHING");
     }
 
     @Override
@@ -70,6 +97,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 platform.draw(canvas);
             }
             this.gamer.draw(canvas);
+            for(Enemy enemy:this.level.getEnemies()){
+                enemy.draw(canvas);
+            }
+            this.level.getTrophy().draw(canvas);
         }
     }
 

@@ -8,6 +8,7 @@ public abstract class Character extends GameObject{
 
     private Integer velocityY;
     private Boolean isJumping;
+    private Integer walkingVelocity;
     /**
      * Constructor del objeto Personaje
      * @param context El contexto de la aplicación
@@ -16,9 +17,12 @@ public abstract class Character extends GameObject{
      * @param width El ancho del objeto
      * @param height El alto del objeto
      * @param spriteResources El array de los IDs de recursos(drawables) que se utilizarán para la animación
+     * @param walkingVelocity Velocidad a la que camina el personaje
      */
-    protected Character(Context context, Integer posicionX, Integer posicionY, Integer width, Integer height, int[] spriteResources) {
+    protected Character(Context context, Integer posicionX, Integer posicionY, Integer width, Integer height, int[] spriteResources, int walkingVelocity) {
         super(context, posicionX, posicionY, width, height, spriteResources);
+        this.walkingVelocity = walkingVelocity;
+        this.velocityY = 0;
     }
 
     /**
@@ -46,5 +50,13 @@ public abstract class Character extends GameObject{
 
     public void setJumping(Boolean jumping) {
         isJumping = jumping;
+    }
+
+    public Integer getWalkingVelocity() {
+        return walkingVelocity;
+    }
+
+    public void setWalkingVelocity(Integer walkingVelocity) {
+        this.walkingVelocity = walkingVelocity;
     }
 }

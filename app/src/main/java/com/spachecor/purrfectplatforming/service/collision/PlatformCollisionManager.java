@@ -1,38 +1,11 @@
-package com.spachecor.purrfectplatforming.service;
+package com.spachecor.purrfectplatforming.service.collision;
 
-import android.graphics.Rect;
-
-import com.spachecor.purrfectplatforming.gameobject.GameObject;
 import com.spachecor.purrfectplatforming.gameobject.character.Character;
 import com.spachecor.purrfectplatforming.gameobject.platform.Platform;
 
 import java.util.List;
 
-public class CollisionManager {
-    public static void lowerCollision(int lowerLimit, Character character){
-        if(character.getPosicionY()+ character.getHeight()>lowerLimit){
-            character.setPosicionY(lowerLimit-character.getHeight());
-            character.setVelocityY(0);
-            character.setJumping(false);
-        }
-    }
-    public static void horizontalCollision(int screenWidth, Character character) {
-        //verificamos la colisión con el lado izquierdo
-        if (character.getPosicionX() < 0) {
-            character.setPosicionX(0);
-        }
-        //verificamos la colisión con el lado derecho
-        else if (character.getPosicionX() + character.getWidth() > screenWidth) {
-            character.setPosicionX(screenWidth - character.getWidth());
-        }
-        //actualizamos el rectángulo de colisión del personaje
-        character.getRectContainer().set(
-                character.getPosicionX(),
-                character.getPosicionY(),
-                character.getPosicionX() + character.getWidth(),
-                character.getPosicionY() + character.getHeight()
-        );
-    }
+public class PlatformCollisionManager extends CollisionManager{
 
     public static void managingCollisionsPlatformsCharacters(List<Platform> platforms, Character character){
         //recorremos las plataformas para detectar colision
@@ -40,15 +13,15 @@ public class CollisionManager {
             if(CollisionManager.isThereACollision(platform, character)){
                 //plataforma solida
                 if(platform.getPlatformType()== Platform.PlatformType.SOLID){
-                    CollisionManager.resolveCollisionSolidPlatformCharacter(platform, character);
+                    PlatformCollisionManager.resolveCollisionSolidPlatformCharacter(platform, character);
                 }else {//plataforma semisolida
-                    CollisionManager.resolveCollisionSemiSolidPlatformCharacter(platform, character);
+                    PlatformCollisionManager.resolveCollisionSemiSolidPlatformCharacter(platform, character);
                 }
             }
         }
     }
 
-    private static void resolveCollisionSemiSolidPlatformCharacter(Platform platform, Character character) {
+    protected static void resolveCollisionSemiSolidPlatformCharacter(Platform platform, Character character) {
         //verificamos si el personaje está cayendo
         if(character.getVelocityY() > 0){
             //verificamos si el personaje está por encima de la plataforma y colisionando con ella
@@ -74,7 +47,7 @@ public class CollisionManager {
     }
 
 
-    private static void resolveCollisionSolidPlatformCharacter(Platform platform, Character character) {
+    protected static void resolveCollisionSolidPlatformCharacter(Platform platform, Character character) {
         //calculamos las distancias de solapamiento en cada dirección
         int overlapLeft = character.getRectContainer().right - platform.getRectContainer().left;
         int overlapRight = platform.getRectContainer().right - character.getRectContainer().left;
@@ -111,10 +84,5 @@ public class CollisionManager {
                 character.getPosicionX() + character.getWidth(),
                 character.getPosicionY() + character.getHeight()
         );
-    }
-
-
-    private static boolean isThereACollision(GameObject gameObjectOne, GameObject gameObjectTwo){
-        return Rect.intersects(gameObjectOne.getRectContainer(), gameObjectTwo.getRectContainer());
     }
 }

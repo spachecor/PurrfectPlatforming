@@ -8,7 +8,6 @@ import com.spachecor.purrfectplatforming.service.SpriteManager;
 public class Gamer extends Character {
 
     private final Integer JUMP_FORCE;
-    private Integer walkingVelocity;
 
     //sprites precargados
     private final Bitmap[] GORDI_SENTADA;
@@ -23,12 +22,11 @@ public class Gamer extends Character {
      * @param width El ancho del objeto
      * @param height El alto del objeto
      * @param spriteResources El array de los IDs de recursos(drawables) que se utilizarán para la animación
+     * @param walkingVelocity Velocidad a la que camina el personaje
      */
     public Gamer(Context context, Integer posicionX, Integer posicionY, Integer width, Integer height, int[] spriteResources, Integer jumpForce, Integer walkingVelocity) {
-        super(context, posicionX, posicionY, width, height, spriteResources);
-        this.setVelocityY(0);
+        super(context, posicionX, posicionY, width, height, spriteResources, walkingVelocity);
         this.JUMP_FORCE = jumpForce;
-        this.walkingVelocity = walkingVelocity;
         this.setJumping(false);
         this.GORDI_SENTADA = SpriteManager.bitmapCreator(
                 context,
@@ -77,12 +75,12 @@ public class Gamer extends Character {
      * Funcion que determina que el personaje se mueva hacia la izquierda
      */
     public void leftMove(){
-        this.setPosicionX(this.getPosicionX()-this.walkingVelocity);
+        this.setPosicionX(this.getPosicionX()-super.getWalkingVelocity());
     }
     /**
      * Funcion que determina que el personaje se mueva hacia la derecha
      */
     public void rightMove(){
-        this.setPosicionX(this.getPosicionX()+this.walkingVelocity);
+        this.setPosicionX(this.getPosicionX()+super.getWalkingVelocity());
     }
 }

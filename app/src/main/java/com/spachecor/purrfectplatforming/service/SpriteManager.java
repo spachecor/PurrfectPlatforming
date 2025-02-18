@@ -57,6 +57,12 @@ public class SpriteManager {
                 new int[]{
                         R.drawable.semisolidplatformcocina
                 }
+        ),
+        //ENEMIES
+        TOILET_PAPER(
+                new int[]{
+                        R.drawable.enemigo
+                }
         );
         private final int[] VALORES;
         Sprite(int[] valores){
