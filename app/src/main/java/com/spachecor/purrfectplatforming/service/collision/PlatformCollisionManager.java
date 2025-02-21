@@ -5,8 +5,19 @@ import com.spachecor.purrfectplatforming.gameobject.platform.Platform;
 
 import java.util.List;
 
+/**
+ * Clase que gestiona las colisiones de las plataformas
+ * @author Selene
+ * @version 1.0
+ */
 public class PlatformCollisionManager extends CollisionManager{
 
+    /**
+     * Funcion que gestiona la accion que sucedera si hubiese una colision entre una Platform y
+     * un Character dependiendo del tipo de Platform que sea
+     * @param platforms La lista de Platforms del nivel
+     * @param character El Character que podría tener una colision con cualquiera de las Platforms
+     */
     public static void managingCollisionsPlatformsCharacters(List<Platform> platforms, Character character){
         //recorremos las plataformas para detectar colision
         for (Platform platform:platforms){
@@ -21,6 +32,12 @@ public class PlatformCollisionManager extends CollisionManager{
         }
     }
 
+    /**
+     * Funcion que define como se resuelve una colision entre una Platform de tipo SemiSolid y un
+     * Character
+     * @param platform La Platform tipo SemiSolid con la que el Character tiene la colision
+     * @param character El Character implicado en la colision
+     */
     protected static void resolveCollisionSemiSolidPlatformCharacter(Platform platform, Character character) {
         //verificamos si el personaje está cayendo
         if(character.getVelocityY() > 0){
@@ -46,7 +63,12 @@ public class PlatformCollisionManager extends CollisionManager{
         }
     }
 
-
+    /**
+     * Funcion que define como se resuelve una colision entre una Platform de tipo Solid y un
+     * Character
+     * @param platform La Platform tipo Solid con la que el Character tiene la colision
+     * @param character El Character implicado en la colision
+     */
     protected static void resolveCollisionSolidPlatformCharacter(Platform platform, Character character) {
         //calculamos las distancias de solapamiento en cada dirección
         int overlapLeft = character.getRECT_CONTAINER().right - platform.getRECT_CONTAINER().left;

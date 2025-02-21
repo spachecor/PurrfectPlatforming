@@ -19,6 +19,11 @@ import com.spachecor.purrfectplatforming.service.SpriteManager;
 import com.spachecor.purrfectplatforming.service.collision.PlatformCollisionManager;
 import com.spachecor.purrfectplatforming.thread.GameThread;
 
+/**
+ * Clase GameView que define la View del juego
+ * @author Selene
+ * @version 1.0
+ */
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
@@ -35,6 +40,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean victory;
     private boolean gameOver;
 
+    /**
+     * Constructor de objetos GameView
+     * @param context El contexto de la Activity que haya llamado al GameView
+     * @param level El nivel que se carga en el GameView
+     */
     public GameView(Context context, Level level) {
         super(context);
         //agregamos el callback para gestionar los cambios en el SurfaceHolder(creacion, cambios y destruccion de la superficie)
@@ -54,6 +64,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.gameOver = false;
     }
 
+    /**
+     * Funcion que define el comportamiento de actualizacion del bucle principal, haciendo posible
+     * que la logica del juego vaya cambiando segun ocurran los eventos
+     */
     public void update(){
         //todo comportamiento de actualizacion del bucle principal
         this.gamer.applyGravity(this.gravity);

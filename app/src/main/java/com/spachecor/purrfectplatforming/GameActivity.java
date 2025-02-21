@@ -18,6 +18,12 @@ import com.spachecor.purrfectplatforming.view.GameView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase GameActivity, que se encarga de generar la GameView y gestionar el inicio y el fin del
+ * nivel
+ * @author Selene
+ * @version 1.0
+ */
 public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -14,6 +14,11 @@ import com.spachecor.purrfectplatforming.gameobject.GameObject;
  */
 public class SpriteManager {
 
+    /**
+     * Enum que define las constantes que representan los diferentes sprites necesarios en el juego
+     * @author Selene
+     * @version 1.0
+     */
     public enum Sprite{
         //CHARACTERS
         //GORDI

@@ -8,6 +8,12 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Clase MainActivity, que es la Activity principal, que llama a la Splash Screen y a los 5
+ * segundos llaman al MenuActivity, pasando de la pantalla de carga a la del menu principal
+ * @author Selene
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
