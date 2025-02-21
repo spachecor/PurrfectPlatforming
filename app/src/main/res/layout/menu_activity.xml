@@ -1,60 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#000000">
+
+    <!-- GIF de fondo -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/backgroundGif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo" />
 
     <!-- Botón "Nueva partida" (inicio de la cadena) -->
     <Button
         android:id="@+id/btnNuevaPartida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#000000"
         android:text="Nueva partida"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btnCargar"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginBottom="10dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <!-- Botón "Cargar" -->
     <Button
         android:id="@+id/btnCargar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cargar"
-        app:layout_constraintTop_toBottomOf="@id/btnNuevaPartida"
-        app:layout_constraintBottom_toTopOf="@+id/btnAjustes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#000000"
+        android:text="Cargar"
+        app:layout_constraintBottom_toTopOf="@+id/btnAjustes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnNuevaPartida" />
 
     <!-- Botón "Ajustes" -->
     <Button
         android:id="@+id/btnAjustes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ajustes"
-        app:layout_constraintTop_toBottomOf="@id/btnCargar"
-        app:layout_constraintBottom_toTopOf="@+id/btnSalir"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#000000"
+        android:text="Ajustes"
+        app:layout_constraintBottom_toTopOf="@+id/btnSalir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCargar" />
 
     <!-- Botón "Salir" -->
     <Button
         android:id="@+id/btnSalir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#000000"
         android:text="Salir"
-        app:layout_constraintTop_toBottomOf="@id/btnAjustes"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAjustes" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
