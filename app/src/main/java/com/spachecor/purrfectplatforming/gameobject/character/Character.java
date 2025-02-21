@@ -4,11 +4,16 @@ import android.content.Context;
 
 import com.spachecor.purrfectplatforming.gameobject.GameObject;
 
+/**
+ * Clase abstracta que define el comportamiento de todos los personajes
+ * @author Selene
+ * @version 1.0
+ */
 public abstract class Character extends GameObject{
 
     private Integer velocityY;
     private Boolean isJumping;
-    private Integer walkingVelocity;
+    private final Integer WALKING_VELOCITY;
     /**
      * Constructor del objeto Personaje
      * @param context El contexto de la aplicación
@@ -21,19 +26,8 @@ public abstract class Character extends GameObject{
      */
     protected Character(Context context, Integer posicionX, Integer posicionY, Integer width, Integer height, int[] spriteResources, int walkingVelocity) {
         super(context, posicionX, posicionY, width, height, spriteResources);
-        this.walkingVelocity = walkingVelocity;
+        this.WALKING_VELOCITY = walkingVelocity;
         this.velocityY = 0;
-    }
-
-    /**
-     * Funcion que aplica la gravedad al eje x del personaje
-     * @param gravity La gravedad
-     */
-    public void applyGravity(int gravity){
-        //aplicamos la velocidad vertical actual a la posición
-        this.setPosicionY(this.getPosicionY() + this.getVelocityY());
-        //aumentamos la velocidad vertical con la gravedad
-        this.setVelocityY(this.getVelocityY() + gravity);
     }
 
     public Integer getVelocityY() {
@@ -52,11 +46,18 @@ public abstract class Character extends GameObject{
         isJumping = jumping;
     }
 
-    public Integer getWalkingVelocity() {
-        return walkingVelocity;
+    public Integer getWALKING_VELOCITY() {
+        return WALKING_VELOCITY;
     }
 
-    public void setWalkingVelocity(Integer walkingVelocity) {
-        this.walkingVelocity = walkingVelocity;
+    /**
+     * Funcion que aplica la gravedad al eje x del personaje
+     * @param gravity La gravedad
+     */
+    public void applyGravity(int gravity){
+        //aplicamos la velocidad vertical actual a la posición
+        this.setPosicionY(this.getPosicionY() + this.getVelocityY());
+        //aumentamos la velocidad vertical con la gravedad
+        this.setVelocityY(this.getVelocityY() + gravity);
     }
 }

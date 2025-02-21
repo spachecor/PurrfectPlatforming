@@ -5,6 +5,12 @@ import android.graphics.Bitmap;
 
 import com.spachecor.purrfectplatforming.service.SpriteManager;
 
+/**
+ * Clase Gamer que define el comportamiento y las propiedades del jugador, el cual debe obtener el
+ * trofeo sin que el enemigo lo alcance
+ * @author Selene
+ * @version 1.0
+ */
 public class Gamer extends Character {
 
     private final Integer JUMP_FORCE;
@@ -15,13 +21,14 @@ public class Gamer extends Character {
     private final Bitmap[] GORDI_CAMINANDO_DCHA;
 
     /**
-     * Constructor del objeto Personaje
+     * Constructor del objeto Gamer
      * @param context El contexto de la aplicación
      * @param posicionX La posición en el eje X del objeto
      * @param posicionY La posición en el eje Y del objeto
      * @param width El ancho del objeto
      * @param height El alto del objeto
      * @param spriteResources El array de los IDs de recursos(drawables) que se utilizarán para la animación
+     * @param jumpForce La fuerza de salto que tiene el Gamer
      * @param walkingVelocity Velocidad a la que camina el personaje
      */
     public Gamer(Context context, Integer posicionX, Integer posicionY, Integer width, Integer height, int[] spriteResources, Integer jumpForce, Integer walkingVelocity) {
@@ -75,12 +82,12 @@ public class Gamer extends Character {
      * Funcion que determina que el personaje se mueva hacia la izquierda
      */
     public void leftMove(){
-        this.setPosicionX(this.getPosicionX()-super.getWalkingVelocity());
+        this.setPosicionX(this.getPosicionX()-super.getWALKING_VELOCITY());
     }
     /**
      * Funcion que determina que el personaje se mueva hacia la derecha
      */
     public void rightMove(){
-        this.setPosicionX(this.getPosicionX()+super.getWalkingVelocity());
+        this.setPosicionX(this.getPosicionX()+super.getWALKING_VELOCITY());
     }
 }

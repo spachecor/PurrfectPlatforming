@@ -46,10 +46,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         //tomamos el level
         this.level = level;
         //tomamos el personaje
-        this.gamer = level.getGamer();
+        this.gamer = level.getGAMER();
         this.handler = new Handler();
         this.threshold = 200;
-        this.gravity = level.getScenery().getGravity();
+        this.gravity = level.getSCENERY().getGravity();
         this.victory = false;
         this.gameOver = false;
     }
@@ -60,32 +60,32 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         //activamos la secuenciacion de fotogramas del personaje para imitar movimiento
         SpriteManager.controlSpriteMovement(this.gamer);
         //reajustamos la posición del rectangulo del personaje según su movimiento
-        this.gamer.getRectContainer().set(this.gamer.getPosicionX(), this.gamer.getPosicionY(), this.gamer.getPosicionX()+this.gamer.getWidth(), this.gamer.getPosicionY()+this.gamer.getHeight());
-        for(Enemy enemy:this.level.getEnemies()){//reajustamos gravedad, movimiento y rectangulo del enemigo
+        this.gamer.getRECT_CONTAINER().set(this.gamer.getPosicionX(), this.gamer.getPosicionY(), this.gamer.getPosicionX()+this.gamer.getWidth(), this.gamer.getPosicionY()+this.gamer.getHeight());
+        for(Enemy enemy:this.level.getENEMIES()){//reajustamos gravedad, movimiento y rectangulo del enemigo
             enemy.applyGravity(this.gravity);
             enemy.updateMovement();
-            enemy.getRectContainer().set(enemy.getPosicionX(), enemy.getPosicionY(), enemy.getPosicionX()+enemy.getWidth(), enemy.getPosicionY()+enemy.getHeight());
+            enemy.getRECT_CONTAINER().set(enemy.getPosicionX(), enemy.getPosicionY(), enemy.getPosicionX()+enemy.getWidth(), enemy.getPosicionY()+enemy.getHeight());
         }
         //reajustamos la posición del rectangulo del trofeo
-        this.level.getTrophy().getRectContainer().set(this.level.getTrophy().getPosicionX(), this.level.getTrophy().getPosicionY(), this.level.getTrophy().getPosicionX()+this.level.getTrophy().getWidth(), this.level.getTrophy().getPosicionY()+this.level.getTrophy().getHeight());
+        this.level.getTROPHY().getRECT_CONTAINER().set(this.level.getTROPHY().getPosicionX(), this.level.getTROPHY().getPosicionY(), this.level.getTROPHY().getPosicionX()+this.level.getTROPHY().getWidth(), this.level.getTROPHY().getPosicionY()+this.level.getTROPHY().getHeight());
         //controlar que el personaje no se salga por el suelo ni por los bordes
         CollisionManager.lowerCollision(this.getHeight(), this.gamer);
-        for(Enemy enemy:this.level.getEnemies()){
+        for(Enemy enemy:this.level.getENEMIES()){
             CollisionManager.lowerCollision(this.getHeight(), enemy);
         }
         CollisionManager.horizontalCollision(this.getWidth(), this.gamer);
-        for(Enemy enemy:this.level.getEnemies()){
+        for(Enemy enemy:this.level.getENEMIES()){
             CollisionManager.horizontalCollision(this.getWidth(), enemy);
         }
         //comprobamos colisionamiento entre personajes y plataformas y entre jugadores y enemigos
-        PlatformCollisionManager.managingCollisionsPlatformsCharacters(this.level.getPlatforms(), this.gamer);
-        for(Enemy enemy:this.level.getEnemies()){
-            PlatformCollisionManager.managingCollisionsPlatformsCharacters(this.level.getPlatforms(), enemy);
+        PlatformCollisionManager.managingCollisionsPlatformsCharacters(this.level.getPLATFORMS(), this.gamer);
+        for(Enemy enemy:this.level.getENEMIES()){
+            PlatformCollisionManager.managingCollisionsPlatformsCharacters(this.level.getPLATFORMS(), enemy);
             this.gameOver = CharacterCollisionManager.managingCollisionGamerEnemy(this.gamer, enemy);
             if(this.gameOver)break;
         }
         //comprobamos colision entre jugador y trofeo
-        this.victory = CharacterCollisionManager.managingCollisionGamerTrophy(this.gamer, this.level.getTrophy());
+        this.victory = CharacterCollisionManager.managingCollisionGamerTrophy(this.gamer, this.level.getTROPHY());
         if(this.victory) System.out.println("VICTORY");
         else if(this.gameOver) System.out.println("GAME OVER");
         else System.out.println("NOTHING");
@@ -96,13 +96,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         //todo comportamiento de dibujo
         if (canvas != null) {
             super.draw(canvas);
-            this.level.getScenery().drawBackground(canvas);
-            this.level.getTrophy().draw(canvas);
-            for(Platform platform: this.level.getPlatforms()){
+            this.level.getSCENERY().drawBackground(canvas);
+            this.level.getTROPHY().draw(canvas);
+            for(Platform platform: this.level.getPLATFORMS()){
                 platform.draw(canvas);
             }
             this.gamer.draw(canvas);
-            for(Enemy enemy:this.level.getEnemies()){
+            for(Enemy enemy:this.level.getENEMIES()){
                 enemy.draw(canvas);
             }
         }
@@ -164,7 +164,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
         //todo el comportamiento al crear la pantalla superficie
         //construimos el fondo
-        this.level.getScenery().setBackground(this, this.getWidth(), this.getHeight());
+        this.level.getSCENERY().setBackground(this, this.getWidth(), this.getHeight());
         this.gameThread.setRunning(true);
         this.gameThread.start();
     }

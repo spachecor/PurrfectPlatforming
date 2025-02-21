@@ -8,58 +8,62 @@ import com.spachecor.purrfectplatforming.gameobject.platform.Platform;
 
 import java.util.List;
 
+/**
+ * Clase Level, que define la estructura, comportamiento y propiedades del nivel
+ * @author Selene
+ * @version 1.0
+ */
 public class Level {
-    private Scenery scenery;
-    private Gamer gamer;
-    private List<Platform> platforms;
-    private List<Enemy> enemies;
-    private Trophy trophy;
+    private final Scenery SCENERY;
+    private final Gamer GAMER;
+    private final List<Platform> PLATFORMS;
+    private final List<Enemy> ENEMIES;
+    private final Trophy TROPHY;
+    private Boolean victory;
 
-    public Level(Scenery scenery, Gamer gamer, List<Platform> platforms, List<Enemy> enemies, Trophy trophy) {
-        this.scenery = scenery;
-        this.gamer = gamer;
-        this.platforms = platforms;
-        this.enemies = enemies;
-        this.trophy = trophy;
+    /**
+     * Constructor del objeto Level
+     * @param scenery El escenario sobre el que ocurre el nivel
+     * @param gamer El jugador que juega el nivel
+     * @param platforms Las plataformas del nivel
+     * @param enemies Los enemigos del nivel
+     * @param trophy El trofeo del nivel
+     * @param victory Propiedad booleana que define si el nivel ha sido ya ganado o no
+     */
+    public Level(Scenery scenery, Gamer gamer, List<Platform> platforms, List<Enemy> enemies, Trophy trophy, Boolean victory) {
+        this.SCENERY = scenery;
+        this.GAMER = gamer;
+        this.PLATFORMS = platforms;
+        this.ENEMIES = enemies;
+        this.TROPHY = trophy;
+        this.victory = victory;
     }
 
-    public Gamer getGamer() {
-        return gamer;
+    public Gamer getGAMER() {
+        return GAMER;
     }
 
-    public void setGamer(Gamer gamer) {
-        this.gamer = gamer;
+    public Scenery getSCENERY() {
+        return SCENERY;
     }
 
-    public Scenery getScenery() {
-        return scenery;
+    public List<Platform> getPLATFORMS() {
+        return PLATFORMS;
     }
 
-    public void setScenery(Scenery scenery) {
-        this.scenery = scenery;
+    public List<Enemy> getENEMIES() {
+        return ENEMIES;
     }
 
-    public List<Platform> getPlatforms() {
-        return platforms;
+    public Trophy getTROPHY() {
+        return TROPHY;
     }
 
-    public void setPlatforms(List<Platform> platforms) {
-        this.platforms = platforms;
+    public Boolean getVictory() {
+        return victory;
     }
 
-    public List<Enemy> getEnemies() {
-        return enemies;
-    }
-
-    public void setEnemies(List<Enemy> enemies) {
-        this.enemies = enemies;
-    }
-
-    public Trophy getTrophy() {
-        return trophy;
-    }
-
-    public void setTrophy(Trophy trophy) {
-        this.trophy = trophy;
+    public void setVictory(Boolean victory) {
+        this.victory = victory;
     }
 }

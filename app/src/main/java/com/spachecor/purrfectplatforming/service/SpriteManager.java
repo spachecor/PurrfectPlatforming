@@ -63,6 +63,12 @@ public class SpriteManager {
                 new int[]{
                         R.drawable.enemigo
                 }
+        ),
+        //TROPHYS
+        TROPHY(
+                new int[]{
+                        R.drawable.trofeo
+                }
         );
         private final int[] VALORES;
         Sprite(int[] valores){

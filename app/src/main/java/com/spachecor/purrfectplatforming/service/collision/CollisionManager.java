@@ -4,14 +4,11 @@ import android.graphics.Rect;
 
 import com.spachecor.purrfectplatforming.gameobject.GameObject;
 import com.spachecor.purrfectplatforming.gameobject.character.Character;
-import com.spachecor.purrfectplatforming.gameobject.platform.Platform;
-
-import java.util.List;
 
 public class CollisionManager {
 
     protected static boolean isThereACollision(GameObject gameObjectOne, GameObject gameObjectTwo){
-        return Rect.intersects(gameObjectOne.getRectContainer(), gameObjectTwo.getRectContainer());
+        return Rect.intersects(gameObjectOne.getRECT_CONTAINER(), gameObjectTwo.getRECT_CONTAINER());
     }
 
     public static void lowerCollision(int lowerLimit, Character character){
@@ -33,7 +30,7 @@ public class CollisionManager {
                 character.setPosicionX(screenWidth - character.getWidth());
             }
             //actualizamos el rectángulo de colisión del personaje
-            character.getRectContainer().set(
+            character.getRECT_CONTAINER().set(
                     character.getPosicionX(),
                     character.getPosicionY(),
                     character.getPosicionX() + character.getWidth(),

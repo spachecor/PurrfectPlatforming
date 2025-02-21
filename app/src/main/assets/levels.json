@@ -1,0 +1,66 @@
+{
+  "levels": [
+    {
+      "id": 0,
+      "scenery": {
+        "gravity": 2,
+        "background": "fondococina"
+      },
+      "gamer": {
+        "positionX": 200,
+        "positionY": 500,
+        "width": 100,
+        "height": 100,
+        "sprites": {
+          "sprite0": "gordisentada1",
+          "sprite1": "gordisentada2",
+          "sprite2": "gordisentada1",
+          "sprite3": "gordisentada2",
+          "sprite4": "gordisentada1",
+          "sprite5": "gordisentada2"
+        },
+        "jumpForce": -30,
+        "walkingVelocity": 15
+      },
+      "platforms": [
+        {
+          "positionX": 500,
+          "positionY": 500,
+          "width": 100,
+          "height": 15,
+          "sprite": "solidplatformcocina",
+          "type": "SOLID"
+        },
+        {
+          "positionX": 750,
+          "positionY": 500,
+          "width": 100,
+          "height": 10,
+          "sprite": "semisolidplatformcocina",
+          "type": "SEMISOLID"
+        }
+      ],
+      "enemies": [
+        {
+          "positionX": 500,
+          "positionY": 500,
+          "width": 100,
+          "height": 100,
+          "sprite": "enemigo",
+          "walkingVelocity": 3,
+          "mobile": true,
+          "minRangeOfMotion": 500,
+          "maxRangeOfMotion": 700
+        }
+      ],
+      "trophy": {
+        "positionX": 500,
+        "positionY": 355,
+        "width": 100,
+        "height": 150,
+        "sprite": "trofeo"
+      },
+      "victory": false
+    }
+  ]
+}

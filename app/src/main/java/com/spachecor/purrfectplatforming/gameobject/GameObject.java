@@ -20,7 +20,7 @@ public abstract class GameObject {
     private Bitmap[] spriteFrames;
     private int currentFrame;
     private long lastFrameChangeTime;
-    private Rect rectContainer;
+    private final Rect RECT_CONTAINER;
     /**
      * Constructor del objeto GameObject
      * @param context El contexto de la aplicación
@@ -38,7 +38,7 @@ public abstract class GameObject {
         this.spriteFrames = SpriteManager.bitmapCreator(context, width, height, spriteResources);
         this.currentFrame = 0;
         this.lastFrameChangeTime = 0L;
-        this.rectContainer = new Rect(posicionX, posicionY, posicionX+width, posicionY+height);
+        this.RECT_CONTAINER = new Rect(posicionX, posicionY, posicionX+width, posicionY+height);
     }
 
     public Integer getPosicionX() {
@@ -97,14 +97,14 @@ public abstract class GameObject {
         this.lastFrameChangeTime = lastFrameChangeTime;
     }
 
-    public Rect getRectContainer() {
-        return rectContainer;
+    public Rect getRECT_CONTAINER() {
+        return RECT_CONTAINER;
     }
 
-    public void setRectContainer(Rect rectContainer) {
-        this.rectContainer = rectContainer;
-    }
-
+    /**
+     * Funcion que define como se dibuja un GameObject
+     * @param canvas El objeto que nos ayuda a crear la Bitmap
+     */
     public synchronized void draw(Canvas canvas){
         canvas.drawBitmap(this.spriteFrames[this.currentFrame], this.posicionX, this.posicionY, null);
     }
