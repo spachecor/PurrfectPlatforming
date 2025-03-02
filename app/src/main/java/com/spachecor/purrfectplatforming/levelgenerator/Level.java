@@ -28,15 +28,14 @@ public class Level {
      * @param platforms Las plataformas del nivel
      * @param enemies Los enemigos del nivel
      * @param trophy El trofeo del nivel
-     * @param victory Propiedad booleana que define si el nivel ha sido ya ganado o no
      */
-    public Level(Scenery scenery, Gamer gamer, List<Platform> platforms, List<Enemy> enemies, Trophy trophy, Boolean victory) {
+    public Level(Scenery scenery, Gamer gamer, List<Platform> platforms, List<Enemy> enemies, Trophy trophy) {
         this.SCENERY = scenery;
         this.GAMER = gamer;
         this.PLATFORMS = platforms;
         this.ENEMIES = enemies;
         this.TROPHY = trophy;
-        this.victory = victory;
+        this.victory = false;
     }
 
     public Gamer getGAMER() {

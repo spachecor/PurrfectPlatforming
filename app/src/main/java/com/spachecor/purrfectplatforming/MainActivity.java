@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
             //cuando termine la barra, iniciamos la siguiente actividad
             handler.post(() -> {
-                startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                startActivity(new Intent(MainActivity.this, LevelsActivity.class));
                 finish();
             });
         }).start();

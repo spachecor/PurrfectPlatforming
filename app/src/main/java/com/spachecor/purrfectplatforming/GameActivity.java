@@ -1,5 +1,6 @@
 package com.spachecor.purrfectplatforming;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new GameView(this, LevelConfigurator.getLevel(this, 0)));
+        Bundle bundle = this.getIntent().getExtras();
+        setContentView(new GameView(this, LevelConfigurator.getLevel(this, bundle.getInt("level"))));
     }
 }

@@ -1,6 +1,7 @@
 package com.spachecor.purrfectplatforming;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button nuevaPartidaButton, cargarPartidaButton, ajustesButton, salirButton;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_activity);
+        nuevaPartidaButton = this.findViewById(R.id.btnNuevaPartida);
+        nuevaPartidaButton.setOnClickListener(v->{
+
+        });
     }
 }

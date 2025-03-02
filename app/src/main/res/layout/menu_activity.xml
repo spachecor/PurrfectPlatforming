@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/fondo" />
+        android:src="@drawable/fondouniverso" />
 
     <!-- Botón "Nueva partida" (inicio de la cadena) -->
     <Button

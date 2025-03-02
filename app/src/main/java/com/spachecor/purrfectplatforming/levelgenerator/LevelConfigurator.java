@@ -154,9 +154,8 @@ public class LevelConfigurator {
                     trophyJson.getInt("height"),
                     trophySpriteResId
             );
-            boolean victory = levelJson.getBoolean("victory");
             //retornamos el nivel
-            return new Level(scenery, gamer, platforms, enemies, trophy, victory);
+            return new Level(scenery, gamer, platforms, enemies, trophy);
         } catch (JSONException e) {
             e.printStackTrace();
         }

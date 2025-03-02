@@ -28,6 +28,9 @@
             android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
         <!-- Mapa activity -->
+        <activity android:name=".LevelsActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
         <!-- Game activity -->
         <activity android:name=".GameActivity"
             android:screenOrientation="landscape"
