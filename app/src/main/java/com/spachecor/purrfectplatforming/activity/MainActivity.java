@@ -1,4 +1,4 @@
-package com.spachecor.purrfectplatforming;
+package com.spachecor.purrfectplatforming.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.os.Looper;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.spachecor.purrfectplatforming.R;
 
 /**
  * Clase MainActivity, que es la Activity principal, que llama a la Splash Screen y a los 5
@@ -25,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.initial_activity);
 
-        progressBar = findViewById(R.id.progressBar);
+        this.progressBar = this.findViewById(R.id.progressBar);
 
         //actualiza la barra de progreso cada 50ms hasta que llegue al 100% (5 seg)
         new Thread(() -> {
-            while (progressStatus < 100) {
-                progressStatus += 1; //incrementamos en 1% cada iteración
-                handler.post(() -> progressBar.setProgress(progressStatus));
+            while (this.progressStatus < 100) {
+                this.progressStatus += 1; //incrementamos en 1% cada iteración
+                this.handler.post(() -> this.progressBar.setProgress(this.progressStatus));
                 try {
                     Thread.sleep(50); //esperamos 50ms antes de la siguiente actualización
                 } catch (InterruptedException e) {
@@ -39,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             //cuando termine la barra, iniciamos la siguiente actividad
-            handler.post(() -> {
-                startActivity(new Intent(MainActivity.this, LevelsActivity.class));
-                finish();
+            this.handler.post(() -> {
+                this.startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                this.finish();
             });
         }).start();
     }

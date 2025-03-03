@@ -1,23 +1,12 @@
-package com.spachecor.purrfectplatforming;
+package com.spachecor.purrfectplatforming.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.spachecor.purrfectplatforming.gameobject.Scenery;
-import com.spachecor.purrfectplatforming.gameobject.Trophy;
-import com.spachecor.purrfectplatforming.gameobject.character.Enemy;
-import com.spachecor.purrfectplatforming.gameobject.character.Gamer;
-import com.spachecor.purrfectplatforming.gameobject.platform.Platform;
-import com.spachecor.purrfectplatforming.levelgenerator.Level;
 import com.spachecor.purrfectplatforming.levelgenerator.LevelConfigurator;
-import com.spachecor.purrfectplatforming.service.SpriteManager;
 import com.spachecor.purrfectplatforming.view.GameView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Clase GameActivity, que se encarga de generar la GameView y gestionar el inicio y el fin del

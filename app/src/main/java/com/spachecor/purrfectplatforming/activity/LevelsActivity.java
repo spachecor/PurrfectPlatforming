@@ -1,11 +1,16 @@
-package com.spachecor.purrfectplatforming;
+package com.spachecor.purrfectplatforming.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.spachecor.purrfectplatforming.R;
 
 public class LevelsActivity extends AppCompatActivity {
     private Intent intent;
@@ -19,6 +24,13 @@ public class LevelsActivity extends AppCompatActivity {
         levelTwo = this.findViewById(R.id.levelTwoButton);
         levelThree = this.findViewById(R.id.levelThreeButton);
         levelFour = this.findViewById(R.id.levelFourButton);
+
+        SharedPreferences preferences = this.getSharedPreferences("victory-levels", Context.MODE_PRIVATE);
+        if(preferences.getBoolean("level0", false))levelZero.setBackground(ContextCompat.getDrawable(this, R.drawable.botonnivelpasado));
+        if(preferences.getBoolean("level1", false))levelOne.setBackground(ContextCompat.getDrawable(this, R.drawable.botonnivelpasado));
+        if(preferences.getBoolean("level2", false))levelTwo.setBackground(ContextCompat.getDrawable(this, R.drawable.botonnivelpasado));
+        if(preferences.getBoolean("level3", false))levelThree.setBackground(ContextCompat.getDrawable(this, R.drawable.botonnivelpasado));
+        if(preferences.getBoolean("level4", false))levelFour.setBackground(ContextCompat.getDrawable(this, R.drawable.botonnivelpasado));
 
         this.intent = new Intent(LevelsActivity.this, GameActivity.class);
 

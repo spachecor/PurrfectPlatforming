@@ -13,7 +13,7 @@
         android:theme="@style/Theme.PurrfectPlatforming"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true"
             android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi">
@@ -24,15 +24,15 @@
             </intent-filter>
         </activity>
         <!-- Menú activity -->
-        <activity android:name=".MenuActivity"
+        <activity android:name=".activity.MenuActivity"
             android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
         <!-- Mapa activity -->
-        <activity android:name=".LevelsActivity"
+        <activity android:name=".activity.LevelsActivity"
             android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
         <!-- Game activity -->
-        <activity android:name=".GameActivity"
+        <activity android:name=".activity.GameActivity"
             android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
     </application>
