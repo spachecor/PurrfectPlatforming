@@ -18,14 +18,14 @@ public class LevelPassedService {
         editor.putBoolean("level4", false);
         editor.commit();
     }
-    public static Boolean isLevelPassed(Context context, String level){
+    public static Boolean isLevelPassed(Context context, Integer level){
         SharedPreferences preferences = context.getSharedPreferences(LevelPassedService.VICTORY_LEVELS_PREFERENCES_NAME, Context.MODE_PRIVATE);
-        return preferences.getBoolean(level, false);
+        return preferences.getBoolean("level"+level, false);
     }
-    public static void setLevelPassed(Context context, String level){
+    public static void setLevelPassed(Context context, Integer level){
         SharedPreferences preferences = context.getSharedPreferences(LevelPassedService.VICTORY_LEVELS_PREFERENCES_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(level, true);
+        editor.putBoolean("level"+level, true);
         editor.commit();
     }
 }

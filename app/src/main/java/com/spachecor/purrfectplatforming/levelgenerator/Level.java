@@ -14,6 +14,7 @@ import java.util.List;
  * @version 1.0
  */
 public class Level {
+    private Integer id;
     private final Scenery SCENERY;
     private final Gamer GAMER;
     private final List<Platform> PLATFORMS;
@@ -29,13 +30,22 @@ public class Level {
      * @param enemies Los enemigos del nivel
      * @param trophy El trofeo del nivel
      */
-    public Level(Scenery scenery, Gamer gamer, List<Platform> platforms, List<Enemy> enemies, Trophy trophy) {
+    public Level(Integer id, Scenery scenery, Gamer gamer, List<Platform> platforms, List<Enemy> enemies, Trophy trophy) {
+        this.id = id;
         this.SCENERY = scenery;
         this.GAMER = gamer;
         this.PLATFORMS = platforms;
         this.ENEMIES = enemies;
         this.TROPHY = trophy;
         this.victory = false;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Gamer getGAMER() {

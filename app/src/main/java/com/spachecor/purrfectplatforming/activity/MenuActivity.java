@@ -29,13 +29,6 @@ public class MenuActivity extends AppCompatActivity {
             LevelPassedService.resetLevels(this);
             this.startActivity(intent);
         });
-        cargarPartidaButton.setOnClickListener(v->{
-            intent.putExtra("level0", LevelPassedService.isLevelPassed(this, "level0"));
-            intent.putExtra("level1", LevelPassedService.isLevelPassed(this, "level1"));
-            intent.putExtra("level2", LevelPassedService.isLevelPassed(this, "level2"));
-            intent.putExtra("level3", LevelPassedService.isLevelPassed(this, "level3"));
-            intent.putExtra("level4", LevelPassedService.isLevelPassed(this, "level4"));
-            this.startActivity(intent);
-        });
+        cargarPartidaButton.setOnClickListener(v-> this.startActivity(intent));
     }
 }

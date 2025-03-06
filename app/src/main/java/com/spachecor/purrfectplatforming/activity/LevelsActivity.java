@@ -19,12 +19,13 @@ public class LevelsActivity extends AppCompatActivity {
         ImageButton levelZero, levelOne, levelTwo, levelThree, levelFour;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.levels_view);
+        //tomamos los levels del view
         levelZero = this.findViewById(R.id.levelZeroButton);
         levelOne = this.findViewById(R.id.levelOneButton);
         levelTwo = this.findViewById(R.id.levelTwoButton);
         levelThree = this.findViewById(R.id.levelThreeButton);
         levelFour = this.findViewById(R.id.levelFourButton);
-
+        //tomamos si los levels están ganados o no desde el SharedPreferences
         SharedPreferences preferences = this.getSharedPreferences("victory-levels", Context.MODE_PRIVATE);
         if(preferences.getBoolean("level0", false))levelZero.setBackground(ContextCompat.getDrawable(this, R.drawable.botonnivelpasado));
         if(preferences.getBoolean("level1", false))levelOne.setBackground(ContextCompat.getDrawable(this, R.drawable.botonnivelpasado));

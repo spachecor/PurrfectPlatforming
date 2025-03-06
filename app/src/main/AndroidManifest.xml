@@ -35,6 +35,10 @@
         <activity android:name=".activity.GameActivity"
             android:screenOrientation="landscape"
             tools:ignore="DiscouragedApi" />
+        <!-- Game Over activity -->
+        <activity android:name=".activity.GameOverActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi" />
     </application>
 
 </manifest>

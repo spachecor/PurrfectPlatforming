@@ -155,7 +155,7 @@ public class LevelConfigurator {
                     trophySpriteResId
             );
             //retornamos el nivel
-            return new Level(scenery, gamer, platforms, enemies, trophy);
+            return new Level(numberLevel, scenery, gamer, platforms, enemies, trophy);
         } catch (JSONException e) {
             e.printStackTrace();
         }

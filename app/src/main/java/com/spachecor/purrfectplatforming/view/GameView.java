@@ -1,14 +1,23 @@
 package com.spachecor.purrfectplatforming.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.spachecor.purrfectplatforming.activity.GameOverActivity;
+import com.spachecor.purrfectplatforming.activity.LevelsActivity;
+import com.spachecor.purrfectplatforming.activity.MenuActivity;
+import com.spachecor.purrfectplatforming.activity.service.LevelPassedService;
 import com.spachecor.purrfectplatforming.gameobject.character.Enemy;
 import com.spachecor.purrfectplatforming.gameobject.character.Gamer;
 import com.spachecor.purrfectplatforming.gameobject.platform.Platform;
@@ -25,6 +34,8 @@ import com.spachecor.purrfectplatforming.thread.GameThread;
  * @version 1.0
  */
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+
+    private Context context;//contexto que nos viene de la GameActivity
 
     private GameThread gameThread;
     private Level level;
@@ -47,6 +58,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
      */
     public GameView(Context context, Level level) {
         super(context);
+        this.context=context;
         //agregamos el callback para gestionar los cambios en el SurfaceHolder(creacion, cambios y destruccion de la superficie)
         this.getHolder().addCallback(this);
         //creamos el hilo del juego y lo asociamos a este SurfaceView
@@ -98,11 +110,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             this.gameOver = CharacterCollisionManager.managingCollisionGamerEnemy(this.gamer, enemy);
             if(this.gameOver)break;
         }
-        //comprobamos colision entre jugador y trofeo
+        //comprobamos colision entre jugador y trofeo y definimos el resultado
         this.victory = CharacterCollisionManager.managingCollisionGamerTrophy(this.gamer, this.level.getTROPHY());
-        if(this.victory) System.out.println("VICTORY");
-        else if(this.gameOver) System.out.println("GAME OVER");
-        else System.out.println("NOTHING");
+        if(this.victory){
+            LevelPassedService.setLevelPassed(this.context, this.level.getId());
+            this.gameThread.setRunning(false);
+            //programamos el cierre de la activity en 2,5 segundos, para que se vea el mensaje de victory
+            this.exitGame(LevelsActivity.class);
+        }else if(this.gameOver){
+            this.gameThread.setRunning(false);
+            this.exitGame(GameOverActivity.class);
+        }
     }
 
     @Override
@@ -118,6 +136,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             this.gamer.draw(canvas);
             for(Enemy enemy:this.level.getENEMIES()){
                 enemy.draw(canvas);
+            }
+            Paint textPaint = new Paint();
+            textPaint.setTextSize(100);
+            textPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            textPaint.setStrokeWidth(5);
+            if(this.victory){
+                textPaint.setColor(Color.GREEN);
+                canvas.drawText("Victory", (float) this.getWidth() /2-200, (float) this.getHeight() /2, textPaint);
+            }
+            if(this.gameOver){
+                textPaint.setColor(Color.RED);
+                canvas.drawText("TERRIBLE", (float) this.getWidth()/2-200, (float) this.getHeight()/2, textPaint);
             }
         }
     }
@@ -202,5 +232,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
     }
-
+    private <T extends AppCompatActivity> void exitGame(Class<T> clase){
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            Intent intent = new Intent(this.context, clase);
+            if(this.gameOver)intent.putExtra("level", this.level.getId());
+            this.context.startActivity(intent);
+        }, 2500);
+    }
 }
