@@ -1,14 +1,15 @@
 package com.spachecor.purrfectplatforming.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.spachecor.purrfectplatforming.R;
+import com.google.android.gms.ads.MobileAds;
+import com.spachecor.purrfectplatforming.activity.service.AdBannerService;
 import com.spachecor.purrfectplatforming.activity.service.LevelPassedService;
 
 /**
@@ -30,5 +31,10 @@ public class MenuActivity extends AppCompatActivity {
             this.startActivity(intent);
         });
         cargarPartidaButton.setOnClickListener(v-> this.startActivity(intent));
+        //ANUNCIO
+        MobileAds.initialize(this, initializationStatus -> {});
+        FrameLayout frameLayoutContenedor = this.findViewById(R.id.contenedor);
+        AdBannerService adBannerService = new AdBannerService(this);
+        adBannerService.setUpAdvView(frameLayoutContenedor);
     }
 }
