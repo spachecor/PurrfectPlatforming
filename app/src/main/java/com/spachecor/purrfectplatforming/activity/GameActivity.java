@@ -18,6 +18,7 @@ import com.spachecor.purrfectplatforming.view.GameView;
 public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if(!MainActivity.soundEffectsService.isGameMusicActivated())MainActivity.soundEffectsService.toggleGameMusic();
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getIntent().getExtras();
         setContentView(new GameView(this, LevelConfigurator.getLevel(this, bundle.getInt("level"))));

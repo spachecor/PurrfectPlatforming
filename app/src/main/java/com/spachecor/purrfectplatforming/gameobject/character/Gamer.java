@@ -3,6 +3,7 @@ package com.spachecor.purrfectplatforming.gameobject.character;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.spachecor.purrfectplatforming.activity.MainActivity;
 import com.spachecor.purrfectplatforming.service.SpriteManager;
 
 /**
@@ -76,6 +77,7 @@ public class Gamer extends Character {
         if (!this.getJumping()) {
             this.setVelocityY(this.JUMP_FORCE);
             this.setJumping(true);
+            MainActivity.soundEffectsService.theJumpSounds();
         }
     }
     /**

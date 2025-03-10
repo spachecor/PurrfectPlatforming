@@ -12,6 +12,7 @@ import com.spachecor.purrfectplatforming.R;
 public class GameOverActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if(!MainActivity.soundEffectsService.isMenuMusicActivated())MainActivity.soundEffectsService.toggleMenuMusic();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_over_view);
         Button volverIntentarlo, volverMenu;

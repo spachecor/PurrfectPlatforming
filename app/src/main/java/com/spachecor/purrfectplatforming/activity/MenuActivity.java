@@ -20,17 +20,31 @@ import com.spachecor.purrfectplatforming.activity.service.LevelPassedService;
 public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Button nuevaPartidaButton, cargarPartidaButton, ajustesButton, salirButton;
+        Button nuevaPartidaButton, cargarPartidaButton, silenciarButton, salirButton;
         Intent intent = new Intent(MenuActivity.this, LevelsActivity.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_activity);
+        //iniciamos la musica
+        if(!MainActivity.soundEffectsService.isMenuMusicActivated()) MainActivity.soundEffectsService.toggleMenuMusic();
+        //nueva partida
         nuevaPartidaButton = this.findViewById(R.id.btnNuevaPartida);
-        cargarPartidaButton = this.findViewById(R.id.btnCargar);
         nuevaPartidaButton.setOnClickListener(v->{
             LevelPassedService.resetLevels(this);
             this.startActivity(intent);
         });
+        //cargar partida
+        cargarPartidaButton = this.findViewById(R.id.btnCargar);
         cargarPartidaButton.setOnClickListener(v-> this.startActivity(intent));
+        //silenciar
+        silenciarButton = this.findViewById(R.id.btnSilenciar);
+        silenciarButton.setOnClickListener(v->{
+            MainActivity.soundEffectsService.toggleMute(silenciarButton);
+        });
+        //salir
+        salirButton = this.findViewById(R.id.btnSalir);
+        salirButton.setOnClickListener(v -> {
+            finishAffinity();
+        });
         //ANUNCIO
         MobileAds.initialize(this, initializationStatus -> {});
         FrameLayout frameLayoutContenedor = this.findViewById(R.id.contenedor);

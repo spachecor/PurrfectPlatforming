@@ -17,6 +17,7 @@ public class LevelsActivity extends AppCompatActivity {
     private Intent intent;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if(!MainActivity.soundEffectsService.isMenuMusicActivated())MainActivity.soundEffectsService.toggleMenuMusic();
         ImageButton levelZero, levelOne, levelTwo, levelThree, levelFour;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.levels_view);

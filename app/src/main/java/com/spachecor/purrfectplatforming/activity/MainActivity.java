@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.spachecor.purrfectplatforming.R;
+import com.spachecor.purrfectplatforming.activity.service.SoundEffectsService;
 
 /**
  * Clase MainActivity, que es la Activity principal, que llama a la Splash Screen y a los 5
@@ -17,13 +18,13 @@ import com.spachecor.purrfectplatforming.R;
  * @version 1.0
  */
 public class MainActivity extends AppCompatActivity {
-
+    public static SoundEffectsService soundEffectsService;
     private ProgressBar progressBar;
     private int progressStatus = 0;
     private final Handler handler = new Handler(Looper.getMainLooper());
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MainActivity.soundEffectsService = new SoundEffectsService(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.initial_activity);
 
