@@ -4,7 +4,7 @@
       "id": 0,
       "scenery": {
         "gravity": 2,
-        "background": "fondococina"
+        "background": "fondosalon"
       },
       "gamer": {
         "positionX": 200,
@@ -24,7 +24,7 @@
       },
       "platforms": [
         {
-          "positionX": 500,
+          "positionX": 300,
           "positionY": 500,
           "width": 100,
           "height": 15,
@@ -32,12 +32,36 @@
           "type": "SOLID"
         },
         {
-          "positionX": 750,
-          "positionY": 500,
+          "positionX": 500,
+          "positionY": 350,
           "width": 100,
           "height": 10,
           "sprite": "semisolidplatformcocina",
           "type": "SEMISOLID"
+        },
+        {
+          "positionX": 500,
+          "positionY": 150,
+          "width": 100,
+          "height": 10,
+          "sprite": "semisolidplatformcocina",
+          "type": "SEMISOLID"
+        },
+        {
+          "positionX": 500,
+          "positionY": 50,
+          "width": 100,
+          "height": 10,
+          "sprite": "semisolidplatformcocina",
+          "type": "SEMISOLID"
+        },
+        {
+          "positionX": 300,
+          "positionY": 50,
+          "width": 100,
+          "height": 15,
+          "sprite": "solidplatformcocina",
+          "type": "SOLID"
         }
       ],
       "enemies": [
@@ -54,8 +78,8 @@
         }
       ],
       "trophy": {
-        "positionX": 500,
-        "positionY": 355,
+        "positionX": 300,
+        "positionY": -100,
         "width": 100,
         "height": 150,
         "sprite": "trofeo"
