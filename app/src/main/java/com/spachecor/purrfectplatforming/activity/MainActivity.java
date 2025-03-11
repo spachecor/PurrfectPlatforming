@@ -43,13 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
             //cuando termine la barra, iniciamos la siguiente actividad
             this.handler.post(() -> {
-                //this.startActivity(new Intent(MainActivity.this, MenuActivity.class));
-                //BORRAR DESPUES
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                this.startActivity(intent);
-                intent.putExtra("level", 0);
-                startActivity(intent);
-                //BORRAR DEPSUES
+                this.startActivity(new Intent(MainActivity.this, MenuActivity.class));
                 this.finish();
             });
         }).start();

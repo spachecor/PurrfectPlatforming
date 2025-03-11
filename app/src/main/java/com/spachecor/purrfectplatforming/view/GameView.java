@@ -143,7 +143,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             textPaint.setStrokeWidth(5);
             if(this.victory){
                 textPaint.setColor(Color.GREEN);
-                canvas.drawText("Victory", (float) this.getWidth() /2-200, (float) this.getHeight() /2, textPaint);
+                canvas.drawText("MIEEEEEEEEEN", (float) this.getWidth() /2-200, (float) this.getHeight() /2, textPaint);
             }
             if(this.gameOver){
                 textPaint.setColor(Color.RED);
